@@ -12,43 +12,51 @@
 
 <body>
     <section class="section">
-        <h1 class="section__h1">Mesure time between dates</h1>
-        <div class="section__div">
-            <div class="section__div-date section__div-padding">
-                <h2>Start Date</h2>
-                <input type="date" id="start-date" required>
+        <h1 class="section__h1">Measure time between dates</h1>
+        <div class="section__date-div">
+            <div class="date-div__wrapper">
+                <h2 class="date-div__h2">Start date</h2>
+                <input class="date-div__input" type="date" id="start-date">
             </div>
+            <div class="date-div__wrapper">
+                <h2 class="date-div__h2">End date</h2>
+                <input class="date-div__input" type="date" id="end-date">
+            </div>
+        </div>
 
-            <div class="section__div-date section__div-padding">
-                <h2>End Date</h2>
-                <input type="date" id="end-date" required>
+        <div class="section__preset-div">
+            <div class="preset-div__wrapper">
+                <button class="btn">1 week</button>
+                <p class="preset-div__p">Calculates 1 week from Start Date</p>
+            </div>
+            <div class="preset-div__wrapper">
+                <button class="btn">1 month</button>
+                <p class="preset-div__p">Calculates 1 month from Start Date</p>
             </div>
         </div>
-        <div class="section__div">
-            <div class="section__div-padding">
-                <button class="section__preset-button">1 week</button>
+
+        <div class="section__days-div">
+            <div class="days-div__wrapper">
+                <button class="btn">All days</button>
+                <p class="days-div__p">Calculates all days within chosen period</p>
             </div>
-            <div class="section__div-padding">
-                <button class="section__preset-button">1 month</button>
+            <div class="days-div__wrapper">
+                <button class="btn">Only Weekdays</button>
+                <p class="days-div__p">Calculates only weekdays within chosen period</p>
+            </div>
+            <div class="days-div__wrapper">
+                <button class="btn">Only Weekends</button>
+                <p class="days-div__p">Calculates only weekdends within chosen period</p>
             </div>
         </div>
-        <div class="section__div">
-            <div class="section__div-padding">
-                <button class="section__preset-button">All days</button>
-            </div>
-            <div class="section__div-padding">
-                <button class="section__preset-button">Weekdays</button>
-            </div>
-            <div class="section__div-padding">
-                <button class="section__preset-button">Weekends</button>
-            </div>
+        <div class="section__result-btn">
+            <button class="result-btn">Calculate</button>
+            <div class="result-area"></div>
         </div>
 
 
 
     </section>
-
-
 
 
 

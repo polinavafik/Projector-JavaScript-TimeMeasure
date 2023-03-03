@@ -1,36 +1,115 @@
 body {
-
+box-sizing: border-box;
 }
+
 .section {
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 10vh;
+}
+.btn {
+    padding: 1vw 0vw;
+    width: 16vw;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: bisque;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: rgb(165, 148, 128);   
+    transition: 0.3s;
+}
+.btn:active {
+    background-color: rgb(133, 95, 51);   
+    transition: 0.1s;
+}
+
+
+.section__h1 {
+    font-size: 5vw;
+    text-align: center;
+}
+
+
+.section__date-div {
+    display: flex;
+    justify-content: space-around;
+}
+.date-div__wrapper {
+    max-width: 35vw;
+    width: 100%;
+    min-width: 15vw;
+   text-align: center;
+}
+.date-div__h2 {
+    white-space: nowrap;
+    font-size: 3.5vw;
+}
+
+
+.section__preset-div {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-around;
+}
+.preset-div__wrapper {
+    max-width: 25vw;
+    width: 100%;
+    min-width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.preset-div__p {
+    font-size: 16px;
+    width: 15vw;
+    text-align: center;
+}
+
+.section__days-div {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-between;
+}
+.days-div__wrapper {
+    max-width: 35vw;
+    width: 100%;
+    min-width: 15vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-top: 10vh;
 }
-.section__h1 {
-    font-size: 4vw;
-}
-.section__div {
-    display: flex;
-}
-.section__div-date {
-    
-}
-.section__div-padding {
-    padding: 2vw 3vw;
-}
-.section__preset-button {
-    font-size: 18px;
-    padding: 1.2vw 2.8vw;
-    border: none;
-    border-radius: 8px;
-    background-color: rgb(163, 154, 142);
-    cursor: pointer;
-    transition: 0.1s;
-}
-.section__preset-button:active {
-    background-color: rgb(209, 135, 31);
-    transition: 0.1s;
+.days-div__p {
+    font-size: 16px;
+    width: 22vw;
+    text-align: center;
 }
 
+
+.section__result-btn {
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+}
+.result-btn {
+    padding: 1vw 0vw;
+    width: 16vw;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color:rgb(113, 133, 75); 
+    cursor: pointer;
+}
+.result-btn:hover {
+    padding: 1.2vw 3.8vw;
+    width: 18vw;
+    font-size: 20px;
+    background-color:  rgb(152, 197, 68); 
+    transition: 0.3s;
+}
+.result-btn:active {
+    background-color: rgb(161, 190, 107);
+    transition: 0.1s;
+}
