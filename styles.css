@@ -3,13 +3,15 @@ box-sizing: border-box;
 }
 
 .section {
-    width: 80vw;
+    width: 100%;
+    min-width: 375px;
     margin: 0 auto;
-    margin-top: 10vh;
+    margin-top: 50px;
 }
 .btn {
-    padding: 1vw 0vw;
-    width: 16vw;
+    padding: 10px 0;
+    max-width: 120px;
+    width: 100%;
     font-size: 14px;
     border: none;
     border-radius: 5px;
@@ -27,89 +29,93 @@ box-sizing: border-box;
 
 
 .section__h1 {
-    font-size: 5vw;
+    font-size: 28px;
     text-align: center;
 }
-
-
 .section__date-div {
     display: flex;
     justify-content: space-around;
 }
 .date-div__wrapper {
-    max-width: 35vw;
+    max-width: 150px;
     width: 100%;
-    min-width: 15vw;
-   text-align: center;
+    text-align: center;
 }
 .date-div__h2 {
     white-space: nowrap;
-    font-size: 3.5vw;
+    font-size: 20px;
 }
 
 
 .section__preset-div {
-    margin-top: 4vh;
+    margin-top: 30px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-around;
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 10px;
 }
 .preset-div__wrapper {
-    max-width: 25vw;
+    max-width: 150px;
     width: 100%;
-    min-width: 15vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 .preset-div__p {
     font-size: 16px;
-    width: 15vw;
     text-align: center;
 }
 
+
 .section__days-div {
-    margin-top: 4vh;
+    margin-top: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 .days-div__wrapper {
-    max-width: 35vw;
-    width: 100%;
-    min-width: 15vw;
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 10px;
+    margin-top: 10px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 
 }
 .days-div__p {
     font-size: 16px;
-    width: 22vw;
+    padding: 0 20px;
     text-align: center;
+    width: 100%;
+    max-width: 300px;
 }
 
 
 .section__result-btn {
-    margin-top: 8vh;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 }
 .result-btn {
-    padding: 1vw 0vw;
-    width: 16vw;
+    padding: 10px 0;
+    max-width: 140px;
+    width: 100%;
     font-size: 18px;
     border: none;
     border-radius: 5px;
-    background-color:rgb(113, 133, 75); 
+    background-color:rgb(152, 197, 68); 
     cursor: pointer;
 }
 .result-btn:hover {
-    padding: 1.2vw 3.8vw;
-    width: 18vw;
+    padding: 10px 0;
+    max-width: 160px;
     font-size: 20px;
-    background-color:  rgb(152, 197, 68); 
+    background-color:  rgb(153, 218, 34); 
     transition: 0.3s;
 }
 .result-btn:active {
-    background-color: rgb(161, 190, 107);
+    background-color: rgb(65, 82, 34);
     transition: 0.1s;
 }
