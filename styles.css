@@ -1,0 +1,36 @@
+body {
+
+}
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 10vh;
+}
+.section__h1 {
+    font-size: 4vw;
+}
+.section__div {
+    display: flex;
+}
+.section__div-date {
+    
+}
+.section__div-padding {
+    padding: 2vw 3vw;
+}
+.section__preset-button {
+    font-size: 18px;
+    padding: 1.2vw 2.8vw;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(163, 154, 142);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.section__preset-button:active {
+    background-color: rgb(209, 135, 31);
+    transition: 0.3s;
+}
+
