@@ -10,12 +10,16 @@ const resultArea = document.querySelector('.result-area')
 
 
 presetOneWeek.addEventListener('click', () => {
-    let startDateValue = Date.parse(startDate.value);
-    let endDateValue = startDateValue + 604800000;
-    let year = new Date(endDateValue).getFullYear();
-    let month = ("0" + (new Date(endDateValue).getMonth() + 1)).slice(-2);
-    let day = ("0" + new Date(endDateValue).getDate()).slice(-2);
-    endDate.value = `${year}-${month}-${day}`
+    if (startDate.value === '') {
+        resultArea.innerHTML = 'Put your dates first!'
+    } else {
+        let startDateValue = Date.parse(startDate.value);
+        let endDateValue = startDateValue + 604800000;
+        let year = new Date(endDateValue).getFullYear();
+        let month = ("0" + (new Date(endDateValue).getMonth() + 1)).slice(-2);
+        let day = ("0" + new Date(endDateValue).getDate()).slice(-2);
+        endDate.value = `${year}-${month}-${day}`
+    }
 })
 presetOneMonth.addEventListener('click', () => {
     let startDateValue = startDate.value;
