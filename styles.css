@@ -97,6 +97,8 @@ box-sizing: border-box;
     margin-top: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .result-btn {
     padding: 10px 0;
@@ -118,4 +120,7 @@ box-sizing: border-box;
 .result-btn:active {
     background-color: rgb(65, 82, 34);
     transition: 0.1s;
+}
+.result-area {
+    margin-top: 20px;
 }
