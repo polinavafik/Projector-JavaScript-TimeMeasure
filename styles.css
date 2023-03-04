@@ -1,10 +1,12 @@
 @font-face {
     font-family: 'Keepon-Truckin';
     src: url(./fonts/KeeponTruckin.ttf) format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Coolvetica';
     src: url(./fonts/coolvetica\ rg.otf) format('openrype');
+    font-display: swap;
 }
 
 body {
@@ -17,7 +19,7 @@ background: #ffdac95b
     width: 100%;
     min-width: 375px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 40px;
     
 }
 .btn {
@@ -47,6 +49,7 @@ background: #ffdac95b
 
 .section__h1 {
     font-size: 48px;
+    margin-bottom: 0;
     text-align: center;
     font-family: 'Keepon-Truckin', sans-serif;
     letter-spacing: 0.05em;
@@ -56,6 +59,7 @@ background: #ffdac95b
 
 }
 .section__date-div {
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
@@ -74,8 +78,6 @@ background: #ffdac95b
     font-size: 20px;
     letter-spacing: 0.1em;
     background-color: #fa8723;
-    box-shadow: 15px 5px 40px #f3340d, -15px -5px 40px #3fec1c;
-    
 }
 
 
@@ -84,8 +86,6 @@ background: #ffdac95b
     padding-top: 20px;
     display: flex;
     justify-content: space-around;
-    border-top: 1px solid #588B8B;
-    border-bottom: 1px solid #588B8B;
 }
 .preset-div__wrapper {
     max-width: 150px;
@@ -103,12 +103,16 @@ background: #ffdac95b
 
 .section__days-div {
     margin-top: 30px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-top: 2px solid #6cacac;
+    border-bottom: 2px solid #6cacac;
+
+    border-radius: 20px;
 }
 .days-div__wrapper {
-    border-top: 1px solid #588B8B;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,7 +126,7 @@ background: #ffdac95b
     max-width: 200px;
 }
 .days-div__h2 {
-    margin: 0 auto 25px auto;
+    margin: 35px auto 25px auto;
     background-color: #F28F3B;
     box-shadow: 35px 6px 35px #FFCA3A, -35px -6px 35px #6A4C93;
     padding: 5px 20px;
@@ -165,4 +169,67 @@ background: #ffdac95b
 .result-area {
     margin-top: 20px;
     font-size: 18px;
+}
+
+@media (min-width:550px) {
+
+.section {
+    max-width: 500px;
+    margin-top: 5vh;
+}
+.btn {
+    padding: 12px 0;
+    max-width: 150px;
+    font-size: 16px;    
+}
+.section__h1 {
+    font-size: 58px;
+}
+.date-div__wrapper {
+    max-width: 160px;
+}
+.section__preset-div {
+    border:none;
+}
+.preset-div__wrapper {
+    max-width: 180px;
+}
+
+
+.section__days-div {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.days-div__wrapper {
+    border-top: none;
+}
+.days-div__p {
+    max-width: 200px;
+}
+
+.section__result-btn {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.result-btn {
+    padding: 10px 0;
+    max-width: 200px;
+    font-size: 26px;
+}
+.result-btn:hover {
+    padding: 15px 10px;
+    max-width: 220px;
+    font-size: 28px;
+}
+
+.result-area {
+    margin-top: 30px;
+    font-size: 20px;
+    padding-bottom: 250px;
+}
 }
