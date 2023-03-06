@@ -176,11 +176,10 @@ background: #ffdac95b
 .section__selector {
     font-family: 'Coolvetica';
     font-size: 16px;
-    padding: 5px 50px;
+    width: 150px;
+    padding: 5px;
 }
-
-
-
+#choose-option {}
 .section__result-btn {
     margin-top: 30px;
     display: flex;
