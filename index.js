@@ -2,9 +2,14 @@ const startDate = document.querySelector('#start-date');
 const endDate = document.querySelector('#end-date');
 const presetOneWeek = document.querySelector('.btn-one-week')
 const presetOneMonth = document.querySelector('.btn-one-month');
-const allDays = document.querySelector('.btn-all-days');
+//const radioButtons = document.querySelectorAll('input[name="radios"]');
+
 const onlyWeekDays = document.querySelector('.btn-only-weekdays');
 const onlyWeekEnds = document.querySelector('.btn-only-weekends');
+const allDays = document.querySelector('.btn-all-days');
+let specialOptionResult;
+
+
 const calculate = document.querySelector('.result-btn')
 const resultArea = document.querySelector('.result-area')
 
@@ -16,9 +21,6 @@ startDate.addEventListener('change', function endDateValidation() {
         endDate.disabled = true;
     }
 })
-
-
-
 
 presetOneWeek.addEventListener('click', () => {
     if (startDate.value === '') {
@@ -53,12 +55,61 @@ presetOneMonth.addEventListener('click', () => {
 
 })
 
+
+allDays.addEventListener('click', function () {
+    if (allDays.checked === true && allDays.value === 'allDays') {
+        let allDays = 0;
+        for (let date = new Date(startDate.value);
+            date <= new Date(endDate.value);
+            date.setDate(date.getDate() + 1)) {
+            if (date.getDay() <= 6) {
+                allDays++;
+            }
+        }
+        specialOptionResult = allDays;
+        console.log(specialOptionResult)
+    }
+})
+onlyWeekDays.addEventListener('click', function () {
+    if (onlyWeekDays.checked === true && onlyWeekDays.value === 'onlyWeekdays') {
+        let weekdays = 0;
+        for (let date = new Date(startDate.value);
+            date <= new Date(endDate.value);
+            date.setDate(date.getDate() + 1)) {
+            if (date.getDay() !== 0 && date.getDay() !== 6) {
+                weekdays++;
+            }
+        }
+        specialOptionResult = weekdays;
+        console.log(specialOptionResult)
+    }
+})
+onlyWeekEnds.addEventListener('click', function () {
+    if (onlyWeekEnds.checked === true && onlyWeekEnds.value === 'onlyWeekends') {
+        let weekends = 0;
+        for (let date = new Date(startDate.value);
+            date <= new Date(endDate.value);
+            date.setDate(date.getDate() + 1)) {
+            if (date.getDay() === 0 || date.getDay() === 6) {
+                weekends++;
+            }
+        }
+        specialOptionResult = weekends;
+        console.log(specialOptionResult)
+    }
+})
+
+
+
+
+
+
 calculate.addEventListener('click', () => {
 
     if (startDate.value === '') {
-        resultArea.innerHTML = 'Put your dates first!'
+        resultArea.innerHTML = 'Put your dates first :)'
     } else if (endDate.value === '') {
-        resultArea.innerHTML = 'Put your End Date as well!'
+        resultArea.innerHTML = 'You should have an End Date as well!'
     } else {
         let result
         let startDateValue = Date.parse(startDate.value)
@@ -71,6 +122,22 @@ calculate.addEventListener('click', () => {
     }
 })
 
+let playAudio = document.querySelector('.section__selector-div'),
+    sound = document.querySelector('#bgdsound')
+audios = document.querySelectorAll('audio');
+
+
+playAudio.addEventListener('mouseover', function () {
+    [].forEach.call(audios, function (audio) {
+        // do whatever
+        audio.play();
+    });
+}, false);
+
+playAudio.addEventListener('mouseleave', function () {
+    sound.pause();
+    sound.currentTime = 0;
+}, false);
 
 
 

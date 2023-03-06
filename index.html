@@ -38,21 +38,39 @@
         <div class="section__days-div">
             <h2 class="days-div__h2">Special Option</h2>
             <div class="days-div__wrapper">
-                <button class="btn btn-all-days">All days</button>
+                <input type="radio" id="radio1" name="radios" value='allDays' class="radio-option btn-all-days"></input>
+                <label for="radio1">All days</label>
                 <p class="days-div__p">Calculates all days within chosen period</p>
             </div>
             <div class="days-div__wrapper">
-                <button class="btn btn-only-weekdays">Only Weekdays</button>
+                <input type="radio" id="radio2" name="radios" value='onlyWeekdays'
+                    class="radio-option btn-only-weekdays"></input>
+                <label for="radio2">Only Weekdays</label>
                 <p class="days-div__p">Calculates only weekdays within chosen period</p>
             </div>
             <div class="days-div__wrapper">
-                <button class="btn btn-only-weekends">Only Weekends</button>
+                <input type="radio" id="radio3" name="radios" value='onlyWeekends'
+                    class="radio-option btn-only-weekends"></input>
+                <label for="radio3">Only Weekends</label>
+
                 <p class="days-div__p">Calculates only weekdends within chosen period</p>
             </div>
         </div>
 
         <div class="section__selector-div">
+            <h2 class="selector-div__h2">Dimension of choice</h2>
+            <audio id="bgdsound" src="./sound/vecna.mp3" preload="auto"></audio>
 
+            <select class="section__selector" id="selector">
+                <option value="seconds">Seconds</option>
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+                <option value="days">Days</option>
+                <option value="weeks" disabled>Weeks</option>
+                <option value="months" disabled>Months</option>
+                <option value="years" disabled>Years</option>
+                <option value="dacedes" disabled>Decades</option>
+            </select>
         </div>
         <div class="section__result-btn">
             <button class="result-btn">Calculate</button>

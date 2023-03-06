@@ -101,6 +101,34 @@ background: #ffdac95b
 }
 
 
+.section__days-div input[type='radio'] {
+    display: none;
+}
+.section__days-div label {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 10px;
+    max-width: 120px;
+    width: 100%;
+    font-size: 14px;
+    border:none;
+    border-radius: 5px;
+    background-color: #fac2a8;
+    cursor: pointer;
+    font-family: 'Coolvetica';
+    letter-spacing: 0.08em;
+    transition: 0.4s;
+  }
+  
+  .section__days-div input[type="radio"]:checked+label {
+    background-color: #F28F3B;   
+    transition: 0.4s;
+    box-shadow: 25px 5px 40px #ee3510, -25px -5px 40px #23f0f0;
+  }
+
+
+
+
 .section__days-div {
     margin-top: 30px;
     padding-bottom: 20px;
@@ -118,6 +146,7 @@ background: #ffdac95b
     justify-content: center;
 
 }
+
 .days-div__p {
     font-size: 16px;
     padding: 0 20px;
@@ -130,6 +159,24 @@ background: #ffdac95b
     background-color: #F28F3B;
     box-shadow: 35px 6px 35px #FFCA3A, -35px -6px 35px #6A4C93;
     padding: 5px 20px;
+}
+
+.section__selector-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.selector-div__h2 {
+    background-color: #F28F3B;
+    padding: 5px 20px;
+    margin: 10px 0;
+}
+.section__selector {
+    font-family: 'Coolvetica';
+    font-size: 16px;
+    padding: 5px 50px;
 }
 
 
@@ -169,6 +216,7 @@ background: #ffdac95b
 .result-area {
     margin-top: 20px;
     font-size: 18px;
+    padding-bottom: 250px;
 }
 
 @media (min-width:550px) {
