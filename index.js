@@ -1,5 +1,6 @@
 const startDate = document.querySelector('#start-date');
 const endDate = document.querySelector('#end-date');
+
 const presetOneWeek = document.querySelector('.btn-one-week')
 const presetOneMonth = document.querySelector('.btn-one-month');
 
