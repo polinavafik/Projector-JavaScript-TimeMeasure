@@ -2,14 +2,15 @@ const startDate = document.querySelector('#start-date');
 const endDate = document.querySelector('#end-date');
 const presetOneWeek = document.querySelector('.btn-one-week')
 const presetOneMonth = document.querySelector('.btn-one-month');
-//const radioButtons = document.querySelectorAll('input[name="radios"]');
 
+
+const allDays = document.querySelector('.btn-all-days');
 const onlyWeekDays = document.querySelector('.btn-only-weekdays');
 const onlyWeekEnds = document.querySelector('.btn-only-weekends');
-const allDays = document.querySelector('.btn-all-days');
 let specialOptionResult;
 
 
+const timeDimension = document.querySelector('.section__selector')
 const calculate = document.querySelector('.result-btn')
 const resultArea = document.querySelector('.result-area')
 
@@ -57,22 +58,17 @@ presetOneMonth.addEventListener('click', () => {
 
 
 allDays.addEventListener('click', function () {
-    if (allDays.checked === true && allDays.value === 'allDays') {
-        let allDays = 0;
-        for (let date = new Date(startDate.value);
-            date <= new Date(endDate.value);
-            date.setDate(date.getDate() + 1)) {
-            if (date.getDay() <= 6) {
-                allDays++;
-            }
-        }
-        specialOptionResult = allDays;
-        console.log(specialOptionResult)
+    if (allDays.checked) {
+        let startDateValue = Date.parse(startDate.value)
+        let endDateValue = Date.parse(endDate.value)
+
+        specialOptionResult = endDateValue - startDateValue;
+        specialOptionResult = specialOptionResult / 1000 / 60 / 60 / 24;
     }
 })
 onlyWeekDays.addEventListener('click', function () {
-    if (onlyWeekDays.checked === true && onlyWeekDays.value === 'onlyWeekdays') {
-        let weekdays = 0;
+    if (onlyWeekDays.checked) {
+        let weekdays = -1;
         for (let date = new Date(startDate.value);
             date <= new Date(endDate.value);
             date.setDate(date.getDate() + 1)) {
@@ -81,11 +77,10 @@ onlyWeekDays.addEventListener('click', function () {
             }
         }
         specialOptionResult = weekdays;
-        console.log(specialOptionResult)
     }
 })
 onlyWeekEnds.addEventListener('click', function () {
-    if (onlyWeekEnds.checked === true && onlyWeekEnds.value === 'onlyWeekends') {
+    if (onlyWeekEnds.checked) {
         let weekends = 0;
         for (let date = new Date(startDate.value);
             date <= new Date(endDate.value);
@@ -95,32 +90,36 @@ onlyWeekEnds.addEventListener('click', function () {
             }
         }
         specialOptionResult = weekends;
-        console.log(specialOptionResult)
     }
 })
 
 
-
-
-
-
 calculate.addEventListener('click', () => {
+    let result = specialOptionResult;
 
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first :)'
     } else if (endDate.value === '') {
         resultArea.innerHTML = 'You should have an End Date as well!'
-    } else {
-        let result
-        let startDateValue = Date.parse(startDate.value)
-        let endDateValue = Date.parse(endDate.value)
+    } else if (!allDays.checked && !onlyWeekDays.checked && !onlyWeekEnds.checked) {
+        resultArea.innerHTML = 'You should choose at least one Special Option'
+    }
 
-        result = endDateValue - startDateValue;
-        result = result / 1000 / 60 / 60 / 24;
-        if (result < 0) { result = result * -1 }
-        resultArea.innerHTML = `Its ${result} days between your two dates `;
+    else if (timeDimension.value === 'seconds') {
+        result = result * 24 * 60 * 60;
+        resultArea.innerHTML = `Its ${result} seconds between your two dates     *considering chosen special options `;
+    } else if (timeDimension.value === 'minutes') {
+        result = result * 24 * 60;
+        resultArea.innerHTML = `Its ${result} minutes between your two dates*    *considering chosen special options `;
+    } else if (timeDimension.value === 'hours') {
+        result = result * 24;
+        resultArea.innerHTML = `Its ${result} hours between your two dates*     *considering chosen special options `;
+    } else if (timeDimension.value === 'days') {
+        resultArea.innerHTML = `Its ${result} days between your two dates     *considering chosen special options `;
     }
 })
+
+/*resultArea.innerHTML = `Its ${result} days between your two dates `;*/
 
 let playAudio = document.querySelector('.section__selector-div'),
     sound = document.querySelector('#bgdsound')
@@ -129,7 +128,6 @@ audios = document.querySelectorAll('audio');
 
 playAudio.addEventListener('mouseover', function () {
     [].forEach.call(audios, function (audio) {
-        // do whatever
         audio.play();
     });
 }, false);
