@@ -8,6 +8,17 @@ const onlyWeekEnds = document.querySelector('.btn-only-weekends');
 const calculate = document.querySelector('.result-btn')
 const resultArea = document.querySelector('.result-area')
 
+startDate.addEventListener('change', function endDateValidation() {
+    if (startDate.value !== '') {
+        endDate.disabled = false;
+        endDate.min = startDate.value
+    } else {
+        endDate.disabled = true;
+    }
+})
+
+
+
 
 presetOneWeek.addEventListener('click', () => {
     if (startDate.value === '') {
