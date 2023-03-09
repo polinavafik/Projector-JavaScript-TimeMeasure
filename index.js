@@ -24,6 +24,8 @@ startDate.addEventListener('change', function endDateValidation() {
     }
 })
 
+//endDate ивент листенер чтобы оно чекало какая дата в старте и не позволяло ее менять и ставить раньше чем в дате начала
+
 presetOneWeek.addEventListener('click', () => {
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first!'
@@ -57,7 +59,7 @@ presetOneMonth.addEventListener('click', () => {
 
 })
 
-
+//сделать так чтобы олл дейс было дефолтом и с самого начала всегда чекнуто
 allDays.addEventListener('click', function () {
     if (allDays.checked) {
         let startDateValue = Date.parse(startDate.value)
@@ -94,19 +96,29 @@ onlyWeekEnds.addEventListener('click', function () {
     }
 })
 
+// сделаь отдельный ивент лисенер, чисто для тайм деменшен где по дефолту мы даем ему значение дни, и можно протом выбрать что то другое. В калкулейт сделать отедлно функцию валидатора и отдельно функцыю калкулятора
+//решить проблему что если второй раз считааешь, то не нужно еще раз выбирать спешел опшен
+//сделать чтобы оно записывало в локал сторедж, пример есть в ту ду листе
 
-calculate.addEventListener('click', () => {
-    let result = specialOptionResult;
-
+function calculateValidation() {
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first :)'
     } else if (endDate.value === '') {
         resultArea.innerHTML = 'You should have an End Date as well!'
     } else if (!allDays.checked && !onlyWeekDays.checked && !onlyWeekEnds.checked) {
         resultArea.innerHTML = 'You should choose at least one Special Option'
+    } else if (timeDimension.value === 'Choose') {
+        resultArea.innerHTML = 'Dont forget to choose your time dimention type <3'
     }
+}
 
-    else if (timeDimension.value === 'seconds') {
+
+calculate.addEventListener('click', () => {
+    let result = specialOptionResult;
+    calculateValidation()
+
+
+    if (timeDimension.value === 'seconds') {
         result = result * 24 * 60 * 60;
         resultArea.innerHTML = `Its ${result} seconds between your two dates     *considering chosen special options `;
     } else if (timeDimension.value === 'minutes') {
@@ -120,19 +132,16 @@ calculate.addEventListener('click', () => {
     }
 })
 
-/*resultArea.innerHTML = `Its ${result} days between your two dates `;*/
+
 
 let playAudio = document.querySelector('.section__selector-div'),
     sound = document.querySelector('#bgdsound')
 audios = document.querySelectorAll('audio');
-
-
 playAudio.addEventListener('mouseover', function () {
     [].forEach.call(audios, function (audio) {
         audio.play();
     });
 }, false);
-
 playAudio.addEventListener('mouseleave', function () {
     sound.pause();
     sound.currentTime = 0;
