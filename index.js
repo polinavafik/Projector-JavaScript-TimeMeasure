@@ -1,21 +1,16 @@
 const startDate = document.querySelector('#start-date');
 const endDate = document.querySelector('#end-date');
-
 const presetOneWeek = document.querySelector('.btn-one-week')
 const presetOneMonth = document.querySelector('.btn-one-month');
-
-
 const allDays = document.querySelector('.btn-all-days');
 const onlyWeekDays = document.querySelector('.btn-only-weekdays');
 const onlyWeekEnds = document.querySelector('.btn-only-weekends');
-let specialOptionResult;
-
-
 const timeDimension = document.querySelector('.section__selector')
 const calculate = document.querySelector('.result-btn')
 const resultArea = document.querySelector('.result-area')
+let specialOptionResult;
 
-startDate.addEventListener('change', function endDateValidation() {
+startDate.addEventListener('change', function dateValidation() {
     if (startDate.value !== '') {
         endDate.disabled = false;
         endDate.min = startDate.value
@@ -23,12 +18,18 @@ startDate.addEventListener('change', function endDateValidation() {
         endDate.disabled = true;
     }
 })
+startDate.addEventListener('change', function noCheatingWithDates() {
+    if (startDate.value > endDate.value) {
+        endDate.value = '';
+    }
 
-//endDate ивент листенер чтобы оно чекало какая дата в старте и не позволяло ее менять и ставить раньше чем в дате начала
+})
+
+
 
 presetOneWeek.addEventListener('click', () => {
     if (startDate.value === '') {
-        resultArea.innerHTML = 'Put your dates first!'
+        resultArea.innerHTML = 'Put the Start Date first!'
     } else {
         let startDateValue = Date.parse(startDate.value);
         let endDateValue = startDateValue + 604800000;
@@ -36,9 +37,14 @@ presetOneWeek.addEventListener('click', () => {
         let month = ("0" + (new Date(endDateValue).getMonth() + 1)).slice(-2);
         let day = ("0" + new Date(endDateValue).getDate()).slice(-2);
         endDate.value = `${year}-${month}-${day}`
+
     }
 })
 presetOneMonth.addEventListener('click', () => {
+    if (startDate.value === '') {
+        resultArea.innerHTML = 'Put the Start Date first!'
+    }
+
     let startDateValue = startDate.value;
     let newMonth = startDateValue.slice(5, 7)
     newMonth = Number(newMonth) + 1
@@ -55,52 +61,9 @@ presetOneMonth.addEventListener('click', () => {
         let endDateValue = `${newYear}-01${startDateValue.slice(7)}`
         endDate.value = endDateValue;
     }
-
-
 })
 
-//сделать так чтобы олл дейс было дефолтом и с самого начала всегда чекнуто
-allDays.addEventListener('click', function () {
-    if (allDays.checked) {
-        let startDateValue = Date.parse(startDate.value)
-        let endDateValue = Date.parse(endDate.value)
-
-        specialOptionResult = endDateValue - startDateValue;
-        specialOptionResult = specialOptionResult / 1000 / 60 / 60 / 24;
-    }
-})
-onlyWeekDays.addEventListener('click', function () {
-    if (onlyWeekDays.checked) {
-        let weekdays = -1;
-        for (let date = new Date(startDate.value);
-            date <= new Date(endDate.value);
-            date.setDate(date.getDate() + 1)) {
-            if (date.getDay() !== 0 && date.getDay() !== 6) {
-                weekdays++;
-            }
-        }
-        specialOptionResult = weekdays;
-    }
-})
-onlyWeekEnds.addEventListener('click', function () {
-    if (onlyWeekEnds.checked) {
-        let weekends = 0;
-        for (let date = new Date(startDate.value);
-            date <= new Date(endDate.value);
-            date.setDate(date.getDate() + 1)) {
-            if (date.getDay() === 0 || date.getDay() === 6) {
-                weekends++;
-            }
-        }
-        specialOptionResult = weekends;
-    }
-})
-
-// сделаь отдельный ивент лисенер, чисто для тайм деменшен где по дефолту мы даем ему значение дни, и можно протом выбрать что то другое. В калкулейт сделать отедлно функцию валидатора и отдельно функцыю калкулятора
-//решить проблему что если второй раз считааешь, то не нужно еще раз выбирать спешел опшен
-//сделать чтобы оно записывало в локал сторедж, пример есть в ту ду листе
-
-function calculateValidation() {
+calculate.addEventListener('click', () => {
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first :)'
     } else if (endDate.value === '') {
@@ -109,15 +72,14 @@ function calculateValidation() {
         resultArea.innerHTML = 'You should choose at least one Special Option'
     } else if (timeDimension.value === 'Choose') {
         resultArea.innerHTML = 'Dont forget to choose your time dimention type <3'
+    } else {
+        calculateResult()
     }
-}
+})
 
-
-calculate.addEventListener('click', () => {
+function calculateResult() {
+    specialOptionCalculate()
     let result = specialOptionResult;
-    calculateValidation()
-
-
     if (timeDimension.value === 'seconds') {
         result = result * 24 * 60 * 60;
         resultArea.innerHTML = `Its ${result} seconds between your two dates     *considering chosen special options `;
@@ -130,7 +92,57 @@ calculate.addEventListener('click', () => {
     } else if (timeDimension.value === 'days') {
         resultArea.innerHTML = `Its ${result} days between your two dates     *considering chosen special options `;
     }
-})
+}
+
+function specialOptionCalculate() {
+    if (allDays.checked) {
+        let startDateValue = Date.parse(startDate.value)
+        let endDateValue = Date.parse(endDate.value)
+        specialOptionResult = endDateValue - startDateValue;
+        specialOptionResult = specialOptionResult / 1000 / 60 / 60 / 24;
+    }
+    else if (onlyWeekDays.checked) {
+        let weekdays = 0;
+        for (let date = new Date(startDate.value); date <= new Date(endDate.value); date.setDate(date.getDate() + 1)) {
+            if (date.getDay() !== 0 && date.getDay() !== 6) {
+                weekdays++;
+            }
+        }
+        specialOptionResult = weekdays;
+    }
+    else if (onlyWeekEnds.checked) {
+        let weekends = 0;
+        for (let date = new Date(startDate.value); date <= new Date(endDate.value); date.setDate(date.getDate() + 1)) {
+            if (date.getDay() === 0 || date.getDay() === 6) {
+                weekends++;
+            }
+        }
+        specialOptionResult = weekends;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
