@@ -69,8 +69,6 @@ presetOneMonth.addEventListener('click', () => {
 })
 
 
-
-
 calculate.addEventListener('click', () => {
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first :)'
@@ -82,8 +80,11 @@ calculate.addEventListener('click', () => {
         resultArea.innerHTML = 'Dont forget to choose your time dimention type <3'
     } else {
         calculateResult()
+        storeResultInTable()
+
     }
 })
+
 
 function calculateResult() {
     specialOptionCalculate()
@@ -101,12 +102,26 @@ function calculateResult() {
     } else if (timeDimension.value === 'days') {
         resultArea.innerHTML = `Its ${result} days between your two dates     *considering chosen special options `;
     }
-    localStorage.setItem('last calculation', `${result} ${timeDimension.value}`)
-    localStorage.setItem('used', true)
-    storeDates()
-    table.hidden = false // якщо сюди вставити showTable() то її не показує
-    storeResultInTable()
 
+    localStorage.setItem('lastCalculation', `${result} ${timeDimension.value}`)
+    localStorage.setItem('used', true)
+    table.hidden = false
+
+    storeDates()
+    createTableElement()
+    storeTableElementLocalStorage(tableElement)
+
+}
+
+function storeDates() {
+    localStorage.setItem('lastStartDate', startDate.value)
+    localStorage.setItem('lastEndDate', endDate.value)
+}
+
+function showTable() {
+    if (used) {
+        table.hidden = false;
+    } else { }
 }
 
 function specialOptionCalculate() {
@@ -117,7 +132,7 @@ function specialOptionCalculate() {
         specialOptionResult = specialOptionResult / 1000 / 60 / 60 / 24;
     }
     else if (onlyWeekDays.checked) {
-        let weekdays = 0;
+        let weekdays = -1;
         for (let date = new Date(startDate.value); date <= new Date(endDate.value); date.setDate(date.getDate() + 1)) {
             if (date.getDay() !== 0 && date.getDay() !== 6) {
                 weekdays++;
@@ -136,21 +151,8 @@ function specialOptionCalculate() {
     }
 }
 
-function storeDates() {
-    localStorage.setItem('last start date', startDate.value)
-    localStorage.setItem('last end date', endDate.value)
-}
-
-function showTable() {
-    if (used) {
-        table.hidden = false;
-    } else { }
-}
-
-const sectionTableTr = document.querySelector('.section__table-tr')
-
 function storeResultInTable() {
-    let newRow = table.insertRow(-1);
+    let newRow = table.insertRow(2);
 
     let startDateCell = newRow.insertCell(0);
     let endDateCell = newRow.insertCell(1);
@@ -162,9 +164,9 @@ function storeResultInTable() {
     endDateCell.classList.add('section__table-td')
     resultCell.classList.add('section__table-td')
 
-    let startDateText = document.createTextNode(localStorage.getItem('last start date'));
-    let endDateText = document.createTextNode(localStorage.getItem('last end date'));
-    let resultText = document.createTextNode(localStorage.getItem('last calculation'));
+    let startDateText = document.createTextNode(localStorage.getItem('lastStartDate'));
+    let endDateText = document.createTextNode(localStorage.getItem('lastEndDate'));
+    let resultText = document.createTextNode(localStorage.getItem('lastCalculation'));
 
     startDateCell.appendChild(startDateText);
     endDateCell.appendChild(endDateText);
@@ -172,15 +174,51 @@ function storeResultInTable() {
 }
 
 
-table.insertAdjacentHTML('beforeend', '')
-table.insertAdjacentElement('beforeend',)
+function createTableElement() {
+    tableElement = {
+        startDateItem: localStorage.getItem('lastStartDate'),
+        endDateItem: textContent = localStorage.getItem('lastEndDate'),
+        resultItem: localStorage.getItem('lastCalculation')
+    }
+
+}
+
+function storeTableElementLocalStorage(tableElement) {
+    let allCalculations;
+    if (localStorage.getItem('allCalculations') !== null) {
+        allCalculations = JSON.parse(localStorage.getItem('allCalculations'));
+        allCalculations = allCalculations.slice(-9);
+    } else {
+        allCalculations = []
+    }
+    allCalculations.push(tableElement);
+    localStorage.setItem('allCalculations', JSON.stringify(allCalculations));
+}
 
 
+function displayPreviousResults() {
+    const allCalculations = JSON.parse(localStorage.getItem('allCalculations'));
 
+    if (allCalculations !== null && allCalculations.length > 0) {
+        for (let i = 0; i < allCalculations.length; i++) {
+            const newRow = table.insertRow();
 
+            const startDateCell = newRow.insertCell();
+            const endDateCell = newRow.insertCell();
+            const resultCell = newRow.insertCell();
 
+            startDateCell.textContent = allCalculations[i].startDateItem;
+            endDateCell.textContent = allCalculations[i].endDateItem;
+            resultCell.textContent = allCalculations[i].resultItem;
 
-
+            newRow.classList.add('section__table-tr')
+            startDateCell.classList.add('section__table-td')
+            endDateCell.classList.add('section__table-td')
+            resultCell.classList.add('section__table-td')
+        }
+    }
+}
+displayPreviousResults();
 
 
 
@@ -210,3 +248,5 @@ playAudio.addEventListener('mouseleave', function () {
     sound.pause();
     sound.currentTime = 0;
 }, false);
+
+
