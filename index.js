@@ -201,11 +201,11 @@ function displayPreviousResults() {
 
     if (allCalculations !== null && allCalculations.length > 0) {
         for (let i = 0; i < allCalculations.length; i++) {
-            const newRow = table.insertRow();
+            const newRow = table.insertRow(2);
 
-            const startDateCell = newRow.insertCell();
-            const endDateCell = newRow.insertCell();
-            const resultCell = newRow.insertCell();
+            const startDateCell = newRow.insertCell(0);
+            const endDateCell = newRow.insertCell(1);
+            const resultCell = newRow.insertCell(2);
 
             startDateCell.textContent = allCalculations[i].startDateItem;
             endDateCell.textContent = allCalculations[i].endDateItem;
