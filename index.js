@@ -8,7 +8,13 @@ const onlyWeekEnds = document.querySelector('.btn-only-weekends');
 const timeDimension = document.querySelector('.section__selector')
 const calculate = document.querySelector('.result-btn')
 const resultArea = document.querySelector('.result-area')
+const table = document.querySelector('.section__table')
+const lastResult = localStorage.getItem('last calculation')
+const used = localStorage.getItem('used')
 let specialOptionResult;
+
+showTable()
+
 
 startDate.addEventListener('change', function dateValidation() {
     if (startDate.value !== '') {
@@ -24,7 +30,6 @@ startDate.addEventListener('change', function noCheatingWithDates() {
     }
 
 })
-
 
 
 presetOneWeek.addEventListener('click', () => {
@@ -63,6 +68,9 @@ presetOneMonth.addEventListener('click', () => {
     }
 })
 
+
+
+
 calculate.addEventListener('click', () => {
     if (startDate.value === '') {
         resultArea.innerHTML = 'Put your dates first :)'
@@ -79,6 +87,7 @@ calculate.addEventListener('click', () => {
 
 function calculateResult() {
     specialOptionCalculate()
+
     let result = specialOptionResult;
     if (timeDimension.value === 'seconds') {
         result = result * 24 * 60 * 60;
@@ -92,6 +101,12 @@ function calculateResult() {
     } else if (timeDimension.value === 'days') {
         resultArea.innerHTML = `Its ${result} days between your two dates     *considering chosen special options `;
     }
+    localStorage.setItem('last calculation', `${result} ${timeDimension.value}`)
+    localStorage.setItem('used', true)
+    storeDates()
+    table.hidden = false // якщо сюди вставити showTable() то її не показує
+    storeResultInTable()
+
 }
 
 function specialOptionCalculate() {
@@ -121,7 +136,44 @@ function specialOptionCalculate() {
     }
 }
 
+function storeDates() {
+    localStorage.setItem('last start date', startDate.value)
+    localStorage.setItem('last end date', endDate.value)
+}
 
+function showTable() {
+    if (used) {
+        table.hidden = false;
+    } else { }
+}
+
+const sectionTableTr = document.querySelector('.section__table-tr')
+
+function storeResultInTable() {
+    let newRow = table.insertRow(-1);
+
+    let startDateCell = newRow.insertCell(0);
+    let endDateCell = newRow.insertCell(1);
+    let resultCell = newRow.insertCell(2);
+
+
+    newRow.classList.add('section__table-tr')
+    startDateCell.classList.add('section__table-td')
+    endDateCell.classList.add('section__table-td')
+    resultCell.classList.add('section__table-td')
+
+    let startDateText = document.createTextNode(localStorage.getItem('last start date'));
+    let endDateText = document.createTextNode(localStorage.getItem('last end date'));
+    let resultText = document.createTextNode(localStorage.getItem('last calculation'));
+
+    startDateCell.appendChild(startDateText);
+    endDateCell.appendChild(endDateText);
+    resultCell.appendChild(resultText);
+}
+
+
+table.insertAdjacentHTML('beforeend', '')
+table.insertAdjacentElement('beforeend',)
 
 
 
