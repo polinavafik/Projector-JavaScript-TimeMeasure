@@ -241,12 +241,48 @@ background: #ffdac95b
 .section__table {
     width: 100%;
 }
+.section-ua {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+}
+.section-ua__h1 {
+    text-align: center;
+}
+.section-ua__a {
+text-decoration: none;
+color: black;
+}
+.section-ua__btn {
+    padding: 10px 10px;
+    font-size: 12px;
+    border:none;
+    border-radius: 50px;
+    background-color: #fac2a8;
+    cursor: pointer;
+    font-family: 'Coolvetica';
+    letter-spacing: 0.08em;
+    transition: 0.4s;
+}
+.section-ua__btn:hover {
+    background-color: #F28F3B;   
+    transition: 0.4s;
+    box-shadow: 10px 5px 30px #ee3510, -10px -5px 30px #23f0f0;
+}
+.section-ua__btn:active {
+    background-color: #C8553D;   
+    transition: 0.1s;
+}
 
 @media (min-width:550px) {
 
 .section {
     max-width: 500px;
     margin-top: 5vh;
+}
+.section-ua {
+    margin-top: 350px;
 }
 .btn {
     padding: 12px 0;
